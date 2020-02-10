@@ -1,3 +1,5 @@
-transformer-xl/
+optimizer*
 model*
+data/
+transformer-xl/data/
 wikiextractor/
