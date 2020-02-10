@@ -1,11 +1,11 @@
 import os
 import importlib
-import sys
+import Input
 transformer_xl = importlib.import_module('transformer-xl')
 #proj_adaptive_softmax = importlib.import_module('transformer-xl.pytorch.utils.proj_adaptive_softmax')
 log_uniform_sampler = importlib.import_module('transformer-xl.pytorch.utils.log_uniform_sampler')
-sys.path.append('transformer-xl.pytorch.utils.proj_adaptive_softmax')
-mem_transformer = importlib.import_module('transformer-xl.pytorch.mem_transformer')
+
+# mem_transformer = importlib.import_module('transformer-xl.pytorch.mem_transformer')
 import torch.nn.functional as F
 import torch
 
@@ -34,5 +34,27 @@ def forward(txl_model, data, target, *mems):
     return probabilities
 
 
-def exe():
-    model_path = os.path.join('transformer-xl', )
+def exe_wt2():
+    os.chdir(os.path.join('transformer-xl', 'pytorch'))
+    data_utils = importlib.import_module('data_utils')
+    txl_model = torch.load('model.pt')
+    os.chdir(os.path.join('..','..'))
+
+    datadir = os.path.join('transformer-xl','data', 'wikitext-2')
+    dataset = 'wt2'
+    text_corpus = data_utils.get_lm_corpus(datadir, dataset)
+    vocabulary = text_corpus.vocab
+
+    vocabulary.unk_idx =vocabulary.sym2idx['<unk>']
+
+    example = [4, 24, 31, 362, 110]
+    s1 = vocabulary.convert_to_sent(example)
+    print(example)
+    print(s1)
+
+    print("inverse=")
+    inverse_example = "<unk> is an English film"
+    t2 = vocabulary.convert_to_tensor(vocabulary.tokenize(inverse_example))
+    print(t2)
+
+
