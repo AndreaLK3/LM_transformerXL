@@ -1,82 +1,63 @@
-import logging
+# Objective:
+# specifying a dataset_dirpath,
+#   either:  - using the module PrepareCorpus,
+#              extract the train, valid and test.txt files from the xml wikipedia dump
+#            - train a transformer-xl model
+#   or: - load the saved transformer-xl model
+
+import PrepareCorpus as PC
 import os
-from io import open
+import Utilities as U
+import logging
+import Filesystem as F
+import importlib
 import torch
-import Utilities as Utils
+import sys
 
-### When reading from a text for inference
-def get_input(flag_text_or_manual, inp_text="", inp_filepath='.'):
-  lines=[]
-  text=""
-  if flag_text_or_manual:
-    with open(os.path.join(inp_filepath, 'input_text.txt'), 'r', encoding='utf-8') as f:
-      lines = f.readlines()
-      text = "\n".join(lines)
-  if flag_text_or_manual == False:
-    lines = inp_text.split('\n')
-    text = inp_text
-  return lines, text
+##### Filesystem checks and utilities
+def check_dataset_splits_present(dataset_dirpath):
+    return ( os.path.exists(os.path.join(dataset_dirpath, 'train.txt'))
+            and os.path.exists(os.path.join(dataset_dirpath, 'valid.txt'))
+            and os.path.exists(os.path.join(dataset_dirpath, 'test.txt')) )
 
-### When iterating over a corpus for training/validation
-class TextCorpusIterator():
-    def __init__(self, tokenizer, file_path, batch_size=4, sequence_length=16):
-
-        assert os.path.isfile(file_path)
-        self.tokenizer = tokenizer
-
-        self.file_path = file_path
-        logging.info("Dataset file at: %s", file_path)
-        self.batch_size = batch_size
-        self.sequence_length = sequence_length
-        self.input_text_file = open(file_path, 'r')
-        self.readingbuffer = []
-        self.total_training_iterations = 0
-
-    def __next__(self):
-        #logging.info("Calling __next__()")
-        self.input_size = self.sequence_length * self.batch_size
-
-        while len(self.readingbuffer) < self.input_size:
-            self.next_line = self.input_text_file.readline()
-            if self.next_line == '':
-                break # End of the dataset
-            self.readingbuffer.extend(self.tokenizer.tokenize(self.next_line))
-
-        self.batch_ids = []
-
-        for sample_start in range(0, min((self.batch_size) * self.sequence_length, len(self.readingbuffer)), self.sequence_length):
-            self.sample_tokens = self.readingbuffer[sample_start:sample_start + self.sequence_length]
-            logging.debug("self.sample_tokens=" + str(self.sample_tokens))
-            if len(self.sample_tokens) < self.sequence_length:
-                self.padded_sample_tokens = self.sample_tokens + ([Utils.PAD_TOKEN] * (self.sequence_length - len(self.sample_tokens)) )# pad)
-                self.sample = self.tokenizer.encode(self.padded_sample_tokens)
-            else: # no need to pad
-                self.sample = self.tokenizer.encode(self.sample_tokens)
-            self.batch_ids.append(self.sample)
-        self.readingbuffer = self.readingbuffer[self.input_size:]
-        logging.debug('self.readingbuffer=' + str(self.readingbuffer))
-
-        # If we are at the end of the dataset
-        if len(self.batch_ids) == 0:
-            raise StopIteration
-
-        # Transposing is necessary because, in the input of Transformer-XL, the text is read along the columns not rows
-        self.input = torch.tensor(self.batch_ids).t()
-
-        return self.input
+def create_folders_ifneeded(folderpaths_ls):
+    for folderpath in folderpaths_ls:
+        if not(os.path.isdir(folderpath)):
+            os.makedirs(folderpath)
+#####
 
 
+### Generic function to gather the text from the wiki dump of a given language
+def make_dataset_splits(wikidump_fpath, dataset_dirpath):
+    U.init_logging('Input-make_dataset_splits.log')
+    create_folders_ifneeded([dataset_dirpath])
 
-    def __len__(self):
-        if self.total_training_iterations != 0:
-            return self.total_training_iterations
-        try:
-            while True:
-                _nextbatch = self.__next__()
-                self.total_training_iterations = self.total_training_iterations + 1
-        except StopIteration:
-            # reset file reader
-            self.input_text_file.close()
-            self.input_text_file = open(self.file_path, 'r')
-            return self.total_training_iterations
+    if not check_dataset_splits_present(dataset_dirpath):
+        logging.info("Gathering text from the WikiDump...")
 
+        PC.create_text_from_wikidump(wikidump_fpath, dataset_dirpath)
+
+        plaintext_dirpath = os.path.join(dataset_dirpath, 'plain_wiki')
+        clean_wiki_dirpath = os.path.join(dataset_dirpath, 'clean_wiki')
+        PC.adjust_plain_wikifiles(plaintext_dirpath, clean_wiki_dirpath)
+
+        PC.reunite_corpus_splits(clean_wiki_dirpath, dataset_dirpath)
+
+
+def get_model_txl(dataset_dirpath):
+    model_dirpath = os.path.join(dataset_dirpath, F.MODEL_SUBFOLDER)
+    create_folders_ifneeded([model_dirpath])
+    model_fpath = os.path.join(model_dirpath, 'model.pt')
+
+    if os.path.exists(model_fpath):
+
+        # adjusting the sys.path to allow us to load a model that is not in transformer-xl/pytorch
+        sys.path.append(os.path.join(os.getcwd(), 'transformer-xl', 'pytorch'))
+        sys.path.append(os.path.join(os.getcwd(), 'transformer-xl', 'pytorch', 'utils'))
+        
+
+        os.chdir(os.path.join('transformer-xl', 'pytorch'))
+        data_utils = importlib.import_module('data_utils')
+        txl_model = torch.load('model.pt')
+
+        os.chdir(os.path.join('..', '..'))

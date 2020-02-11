@@ -1,16 +1,14 @@
 import os
 import importlib
-import Input
-transformer_xl = importlib.import_module('transformer-xl')
-proj_adaptive_softmax = importlib.import_module('transformer-xl.pytorch.utils.proj_adaptive_softmax')
-log_uniform_sampler = importlib.import_module('transformer-xl.pytorch.utils.log_uniform_sampler')
 
+#transformer_xl = importlib.import_module('transformer-xl')
+#proj_adaptive_softmax = importlib.import_module('transformer-xl.pytorch.utils.proj_adaptive_softmax')
+#log_uniform_sampler = importlib.import_module('transformer-xl.pytorch.utils.log_uniform_sampler')
 # mem_transformer = importlib.import_module('transformer-xl.pytorch.mem_transformer')
 import torch.nn.functional as F
 import torch
 
 DEVICE = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
-
 
 ############
 def top_k_top_p_filtering(logits, top_k=0, filter_value=-float('Inf')):

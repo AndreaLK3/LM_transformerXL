@@ -30,40 +30,40 @@ def log_chronometer(time_measurements):
     logging.info('t' + str(i + 1) + ' - t' + str(i) + ' = ' + str(round(t2 - t1, 5)))
 
 
-##### Cleaning up special characters from the output
-def adjust_puncts(line):
-  # simple rules of detokenization
-
-  line = line.replace(' @-@ ', '-')
-  line = line.replace(' @,@ ', ',')
-  line = line.replace(' @.@ ', '.')
-  line = line.replace(' . ', '. ')
-  line = line.replace(' , ', ', ')
-  line = line.replace(' : ', ': ')
-  line = line.replace(' ; ', '; ')
-  line = line.replace(" 's ", "'s ")
-  line = line.replace(' ( ', ' (')
-  line = line.replace(' ) ', ') ')
-  return line
-
-def format_text(tokens):
-  line = ''
-  for token in tokens:
-    if token == '<eos>':
-      line += '\n'
-    else:
-      line += token
-      line += ' '
-  line = adjust_puncts(line)
-  return line
-
-
-
-#########
-# Exception for early stopping
-class EarlyStoppingException(Exception):
-    def __init__(self, message=""):
-        super().__init__(message)
+# ##### Cleaning up special characters from the output
+# def adjust_puncts(line):
+#   # simple rules of detokenization
+#
+#   line = line.replace(' @-@ ', '-')
+#   line = line.replace(' @,@ ', ',')
+#   line = line.replace(' @.@ ', '.')
+#   line = line.replace(' . ', '. ')
+#   line = line.replace(' , ', ', ')
+#   line = line.replace(' : ', ': ')
+#   line = line.replace(' ; ', '; ')
+#   line = line.replace(" 's ", "'s ")
+#   line = line.replace(' ( ', ' (')
+#   line = line.replace(' ) ', ') ')
+#   return line
+#
+# def format_text(tokens):
+#   line = ''
+#   for token in tokens:
+#     if token == '<eos>':
+#       line += '\n'
+#     else:
+#       line += token
+#       line += ' '
+#   line = adjust_puncts(line)
+#   return line
+#
+#
+#
+# #########
+# # Exception for early stopping
+# class EarlyStoppingException(Exception):
+#     def __init__(self, message=""):
+#         super().__init__(message)
 
 
 ########
