@@ -7,12 +7,13 @@ import re
 import Utilities as Utils
 import regex
 import sys
-import RecordResults as RR
-import WordPredictionCore as WPC
+import RecordResults as Rr
+import WordPredictionCore as Wpc
 from Utilities import DEVICE
 
-CTX_LEN = 256 # number of tokens in a full transformer window
-LOGFILE = 'LM_TXL.log'
+
+CTX_LEN = 256  # number of tokens in a full transformer window
+LOGFILE = 'LM.log'
 LOGLEVEL = logging.WARN
 
 ########## The Language Model object
@@ -21,8 +22,9 @@ class LM_TransformerXL():
     ########## Constructor
     # Current default choices are meant for the development phase: input from text file in the same folder
     # The current version is not parameterized by language
-    def __init__(self, dataset_dirpath, flag_text_or_manual=True, input_filepath=".", flag_verbose=True):
+    def __init__(self, dataset, flag_text_or_manual=True, input_filepath=".", flag_verbose=True):
 
+        self.dataset_dirpath = (dataset.value)[0]
         self.flag_text_or_manual = flag_text_or_manual
         self.input_filepath = input_filepath
         self.flag_verbose = flag_verbose
@@ -30,7 +32,7 @@ class LM_TransformerXL():
         Utils.init_logging(LOGFILE, loglevel=LOGLEVEL)
 
         ###### We have to load the components of the pre-trained model
-        self.model, self.vocabulary = load_model_and_vocab(dataset_dirpath)
+        self.model, self.vocabulary = load_model_and_vocab(self.dataset_dirpath)
 
         # If we have a GPU, move the model onto cuda
         # self.model.eval() # already the default when you load from_pretrained
@@ -48,37 +50,39 @@ class LM_TransformerXL():
 
         # 2) From the whole text, extract the context for the prediction
         self.context = select_context(self.all_text)
-        logging.info(self.context)
 
         # 3) Tokenize the context
         self.context_tokens = self.vocabulary.tokenize(self.context)
+        logging.info('*********\n' + str(self.context_tokens) + '\n*********')
 
         # 4) Determine if we are Out-Of-Word, or instead we are dealing with a prefix
         self.outofword_setting = check_outofword_setting(self.context)
 
         # 5) Compute the predictions, using the attributes & elements of this Language Model object
-        self.proposed_nextwords, self.probabilities = WPC.predict(self.model, self.vocabulary, self.context_tokens)
+        self.proposed_nextwords, self.probabilities = Wpc.predict(self.model, self.vocabulary, self.context_tokens)
 
         # 6) Logging, on CSV and graph
         if self.flag_verbose:
-            RR.write_nextwords_incsv(self.context, self.proposed_nextwords, self.probabilities)
-            RR.create_graphs(self.context_tokens, self.proposed_nextwords, self.probabilities)
+            Rr.write_nextwords_incsv(self.context, self.proposed_nextwords, self.probabilities)
+            Rr.create_graphs(self.context_tokens, self.proposed_nextwords, self.probabilities.cpu())
             logging.info(self.proposed_nextwords)
             logging.info(self.probabilities)
-
-
-
 
 
 ########## Functions to load the model and the vocabulary ##########
 
 def load_model_and_vocab(dataset_dirpath):
 
-    os.chdir(os.path.join('transformer-xl', 'pytorch'))
+    sys.path.append(os.path.join('transformer-xl', 'pytorch'))
     data_utils = importlib.import_module('data_utils')
 
-    dataset_type = 'wt103'  # the default processing (e.g. <eos>) that we are using, among the alternatives
-    text_corpus = data_utils.get_lm_corpus(dataset_dirpath, dataset_type)
+    corpus_fpath = os.path.join(dataset_dirpath, 'corpus.pt')
+    if os.path.exists(corpus_fpath):
+        text_corpus = torch.load(corpus_fpath)
+    else:
+        dataset_type = 'wt103'  # the default processing (e.g. <eos>) that we are using, among the alternatives
+        text_corpus = data_utils.get_lm_corpus(dataset_dirpath, dataset_type)
+        torch.save(text_corpus, corpus_fpath)
 
     vocabulary = text_corpus.vocab
     vocabulary.unk_idx = vocabulary.sym2idx['<unk>']
@@ -103,6 +107,8 @@ def get_txl_model(dataset_dirpath):
     else:
         logging.info("Model not present. We must train it on the specified dataset and select the best version")
         return None
+
+
 
 
 ########## Functions to select the context in the input text, and define the Out-of-word setting ##########

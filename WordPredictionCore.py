@@ -70,7 +70,7 @@ def get_logits(p_a_logsoftmax, hidden, target, keep_order=False):
 
             mask_i = (target >= l_idx) & (target < r_idx) # the target must be in one of the sections after the first
             indices_i = mask_i.nonzero().squeeze()
-            print("indices_i = " + str(indices_i))
+            #print("indices_i = " + str(indices_i))
 
             if indices_i.numel() == 0:
                 continue
@@ -83,7 +83,7 @@ def get_logits(p_a_logsoftmax, hidden, target, keep_order=False):
                 hidden_i = hidden.index_select(0, indices_i)
 
                 tail_logit_i = p_a_logsoftmax._compute_logit(hidden_i, weight_i, bias_i, proj_i)
-                # must still refine
+                # must still refine ?
                 print("tail_logit_i.shape = " + str(tail_logit_i.shape))
                 logit_all = torch.cat([logit_all, tail_logit_i], dim=0)
 
@@ -127,7 +127,8 @@ def get_probabilities(txl_model, data, target, *mems):
 ########## Entry point function
 def predict(model, vocabulary, context_tokens, labels_shape=(1,1)):
     inverse_example = "<unk> is an English film, television and theatre actor . He had"
-    ctx_tensor = vocabulary.convert_to_tensor(context_tokens).t().to(torch.int64).to(DEVICE)
+    ctx_tensor = vocabulary.convert_to_tensor(context_tokens).unsqueeze(0).t().to(torch.int64).to(DEVICE)
+    print(ctx_tensor.shape)
 
     labels= torch.ones(size=(1,1)).to(torch.int64).to(DEVICE) # placeholder label, to specify that we are predicting the next token (or possibly more)
     top_probs, top_indices = get_probabilities(model, data=ctx_tensor, target=labels)

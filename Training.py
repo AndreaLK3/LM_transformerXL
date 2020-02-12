@@ -6,15 +6,6 @@ import os
 import sys
 import Utilities as Utils
 
-# A Dataset refers to the tuple (dataset_dirpath, wikidump_fname)
-class Dataset(Enum):
-    DANISH_WIKI = (os.path.join(Utils.DATASETS_FOLDER, Utils.DANISH_WIKI),
-                   'dawiki-latest-pages-articles.xml.bz2')
-    WIKITEXT_103 = (os.path.join(os.getcwd(), Utils.DATASETS_FOLDER, Utils.WIKITEXT_103),
-                    None)
-
-
-
 def train(dataset):
 
     sys.path.append(os.path.join(os.getcwd(), 'transformer-xl', 'pytorch'))

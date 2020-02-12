@@ -5,19 +5,29 @@ import logging
 import importlib
 import torch
 import sys
+from enum import Enum
+import Utilities as Utils
+
+# A Dataset refers to the tuple (dataset_dirpath, wikidump_fname)
+class Dataset(Enum):
+    DANISH_WIKI = (os.path.join(Utils.DATASETS_FOLDER, Utils.DANISH_WIKI),
+                   'dawiki-latest-pages-articles.xml.bz2')
+    WIKITEXT_103 = (os.path.join(os.getcwd(), Utils.DATASETS_FOLDER, Utils.WIKITEXT_103),
+                    None)
+
 
 ##### Filesystem check
 def check_dataset_splits_present(dataset_dirpath):
     return ( os.path.exists(os.path.join(dataset_dirpath, 'train.txt'))
             and os.path.exists(os.path.join(dataset_dirpath, 'valid.txt'))
             and os.path.exists(os.path.join(dataset_dirpath, 'test.txt')) )
-
 #####
+
 
 ##### Generic function to gather the text from the wiki dump of a given language
 def make_dataset_splits(dataset):
 
-    dataset_dirpath, wikidump_fname = dataset
+    dataset_dirpath, wikidump_fname = dataset.value
 
     if not check_dataset_splits_present(dataset_dirpath):
         logging.info("Gathering text from the WikiDump...")

@@ -20,6 +20,8 @@ DATASETS_FOLDER = 'Datasets'
 WIKITEXT_103 = 'WikiText-103'
 DANISH_WIKI = 'Danish_Wiki'
 
+DIR_WORDPROBABILITIES = 'candidate next words'
+
 
 ####### Logging ########
 
@@ -48,6 +50,8 @@ def create_folders_ifneeded(folderpaths_ls):
     for folderpath in folderpaths_ls:
         if not(os.path.isdir(folderpath)):
             os.makedirs(folderpath)
+
+
 
 
 ######## Drawing graphs #########

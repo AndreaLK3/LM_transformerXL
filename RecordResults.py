@@ -5,10 +5,35 @@ from io import open
 import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
+from Utilities import NUM_DISPLAYED
+import Utilities as Utils
 
-import Filesystem as F
-from Utilities import format_text, NUM_DISPLAYED
+##### Cleaning up special characters from the output
+def adjust_puncts(line):
+  # simple rules of detokenization
 
+  line = line.replace(' @-@ ', '-')
+  line = line.replace(' @,@ ', ',')
+  line = line.replace(' @.@ ', '.')
+  line = line.replace(' . ', '. ')
+  line = line.replace(' , ', ', ')
+  line = line.replace(' : ', ': ')
+  line = line.replace(' ; ', '; ')
+  line = line.replace(" 's ", "'s ")
+  line = line.replace(' ( ', ' (')
+  line = line.replace(' ) ', ') ')
+  return line
+
+def format_text(tokens):
+  line = ''
+  for token in tokens:
+    if token == '<eos>':
+      line += '\n'
+    else:
+      line += token
+      line += ' '
+  line = adjust_puncts(line)
+  return line
 
 def write_sequence_output(context, start_idx, reference, generation, out_path):
   with open(out_path, 'w', encoding='utf-8') as f:
@@ -25,13 +50,13 @@ def write_sequence_output(context, start_idx, reference, generation, out_path):
 
 def write_nextwords_incsv(context, nextwords, probs_tensor):
   #If the directory s not there yet, create it. If it contains > 50 files, clean it
-  dirname = F.DIR_WORDPROBABILITIES
+  dirname = Utils.DIR_WORDPROBABILITIES
   if not os.path.exists(dirname):
       os.makedirs(dirname)
 
   filename = create_filename("", context, ".csv")
 
-  with open(os.path.join(F.DIR_WORDPROBABILITIES, filename), mode='w') as suggestions_file:
+  with open(os.path.join(Utils.DIR_WORDPROBABILITIES, filename), mode='w') as suggestions_file:
 
     all_probs_ls = [round(element.item(),4) for element in probs_tensor]
     word_prob_df = pd.DataFrame(list(zip(nextwords, all_probs_ls)))
@@ -41,7 +66,7 @@ def write_nextwords_incsv(context, nextwords, probs_tensor):
 
 # Build a pyplot graph that show the probabilities for choosing the next word, as produced by the Transformer-XL LM
 def create_graphs(context_tokens, words, probs):
-  saves_directory = F.DIR_WORDPROBABILITIES
+  saves_directory = Utils.DIR_WORDPROBABILITIES
 
   print(context_tokens)
   context_adjusted = [ token if token!='<eos>' else "\n" for token in context_tokens[-128:] ]
@@ -63,7 +88,7 @@ def create_graphs(context_tokens, words, probs):
            bbox=props, verticalalignment='top', wrap=True) #bbox=props,
 
 
-  plt.show()
+  #plt.show()
   fname = create_filename("", context_printable, '.png')
 
   plt.savefig(os.path.join(saves_directory, fname))
