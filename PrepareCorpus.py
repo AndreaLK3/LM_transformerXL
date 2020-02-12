@@ -1,3 +1,4 @@
+import Utilities as Utils
 import logging
 import os
 import subprocess
@@ -10,7 +11,7 @@ import re
 def create_text_from_wikidump(path_to_wiki_dump, dataset_dirpath):
     path_to_wikiextractor = os.path.join('wikiextractor', 'WikiExtractor.py')
     path_to_dest_folder = os.path.join(dataset_dirpath,'plain_wiki')
-    cmd = ['python',
+    cmd = ['python2',
            path_to_wikiextractor,
            '--no_templates',
            '--min_text_length',
@@ -54,8 +55,8 @@ def reunite_corpus_splits(clean_wiki_dirpath, output_dirpath):
 
     clean_wiki_fpaths = sorted([os.path.join(clean_wiki_dirpath, fname) for fname in os.listdir(clean_wiki_dirpath)])
     tot_files = len(clean_wiki_fpaths)
-    out_train_file = open(os.path.join(output_dirpath, 'training.txt'),'w')
-    out_valid_file = open(os.path.join(output_dirpath, 'validation.txt'),'w')
+    out_train_file = open(os.path.join(output_dirpath, 'train.txt'),'w')
+    out_valid_file = open(os.path.join(output_dirpath, 'valid.txt'),'w')
     out_test_file = open(os.path.join(output_dirpath, 'test.txt'),'w')
 
     for i in range(tot_files):

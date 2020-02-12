@@ -2,59 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e67c8beb-52bc-4652-8ee6-c963604a3af3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/LM_TXL.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Training.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/WordPredictionCore.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/__init__.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/yesterdays_version/transformer-xl/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Filesystem.py" beforeDir="false" afterPath="$PROJECT_DIR$/Filesystem.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Filesystem.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Input.py" beforeDir="false" afterPath="$PROJECT_DIR$/Input.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prediction/Prediction_Core.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prediction/RecordResults.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prediction/TW.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SequenceGeneration.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PrepareCorpus.py" beforeDir="false" afterPath="$PROJECT_DIR$/PrepareCorpus.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Utilities.py" beforeDir="false" afterPath="$PROJECT_DIR$/Utilities.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WT103_log.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/WordPrediction.py" beforeDir="false" afterPath="$PROJECT_DIR$/WordPrediction.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/candidate next words/038_16_45__ my original_.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/candidate next words/038_16_45__my original _.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/candidate next words/038_16_46__ew York is a_.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/candidate next words/038_16_46__w York is a _.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/candidate next words/038_17_59__ding of the _.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/candidate next words/038_18_00__nding of the_.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/candidate next words/038_18_06__ferings and _.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/candidate next words/038_18_06__fferings and_.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/candidate next words/038_18_06__hem through _.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/candidate next words/038_18_06__them through_.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/candidate next words/038_18_07__erform these_.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/candidate next words/038_18_07__rform these _.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/candidate next words/038_18_08__. After the _.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/candidate next words/038_18_08__k&gt; After the_.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/candidate next words/038_18_10__ managed the_.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/candidate next words/038_18_10__managed the _.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/candidate next words/WT103_038_14_16__ my original_.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/candidate next words/WT103_038_14_16__my original _.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/candidate next words/WT2_038_14_19__ my original_.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/candidate next words/WT2_038_14_19__my original _.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/candidate next words/WikiText2_micro/037_13_50__Ancient  _.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/candidate next words/WikiText2_micro/037_13_50__Ancient_.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/candidate next words/WikiText2_micro/037_13_52__ deities are_.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/candidate next words/WikiText2_micro/037_13_52__an deities  _.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/candidate next words/WikiText2_micro/037_13_52__eities are  _.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/candidate next words/WikiText2_micro/037_13_52__ent Egyptian_.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/candidate next words/WikiText2_micro/037_13_52__t Egyptian  _.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/candidate next words/WikiText2_micro/037_13_52__tian deities_.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/candidate next words/WikiText2_micro/037_13_57__es are the  _.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/candidate next words/WikiText2_micro/037_13_57__ties are the_.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/candidate next words/WikiText2_micro/037_14_01__led by the  _.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/candidate next words/WikiText2_micro/037_14_01__olled by the_.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/candidate next words/WikiText2_micro/037_14_08__Atenism  _.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/candidate next words/WikiText2_micro/037_14_08__Atenism_.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/candidate next words/WikiText2_micro/037_14_08__Egyptian  _.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/candidate next words/WikiText2_micro/037_14_08__Egyptian_.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/candidate next words/WikiText2_micro/037_14_12__Ancient  _.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/candidate next words/WikiText2_micro/037_14_12__Ancient_.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/seqgen/test.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/temp.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WordPrediction.py" beforeDir="false" afterPath="$PROJECT_DIR$/WordPredictionExample.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/transformer-xl" beforeDir="false" afterPath="$PROJECT_DIR$/transformer-xl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/transformer-xl/pytorch/mem_transformer.py" beforeDir="false" afterPath="$PROJECT_DIR$/transformer-xl/pytorch/mem_transformer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yesterdays_version/transformer-xl/pytorch/eval.py" beforeDir="false" afterPath="$PROJECT_DIR$/yesterdays_version/transformer-xl/pytorch/eval.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yesterdays_version/transformer-xl/pytorch/mem_transformer.py" beforeDir="false" afterPath="$PROJECT_DIR$/yesterdays_version/transformer-xl/pytorch/mem_transformer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yesterdays_version/transformer-xl/pytorch/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/yesterdays_version/transformer-xl/pytorch/train.py" afterDir="false" />
@@ -66,21 +27,12 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/transformer-xl/pytorch/train.py">
+        <entry file="file://$PROJECT_DIR$/WordPredictionExample.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="33" column="43" selection-start-line="33" selection-start-column="43" selection-end-line="33" selection-end-column="43" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WordPrediction.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="239">
-              <caret line="181" column="37" selection-start-line="177" selection-start-column="4" selection-end-line="181" selection-end-column="37" />
+            <state relative-caret-position="675">
+              <caret line="45" column="17" selection-start-line="45" selection-start-column="17" selection-end-line="45" selection-end-column="17" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -89,24 +41,33 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/PrepareCorpus.py">
+        <entry file="file://$PROJECT_DIR$/Input.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-295">
-              <caret line="28" column="26" selection-start-line="28" selection-start-column="26" selection-end-line="28" selection-end-column="26" />
+            <state relative-caret-position="45">
+              <caret line="3" column="14" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WordPredictionCore.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="735">
+              <caret line="49" column="17" selection-start-line="49" selection-start-column="17" selection-end-line="49" selection-end-column="17" />
               <folding>
-                <element signature="e#0#14#0" expanded="true" />
+                <element signature="e#0#9#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Input.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/LM_TXL.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="251">
-              <caret line="56" column="8" selection-start-line="56" selection-start-column="8" selection-end-line="56" selection-end-column="8" />
+            <state relative-caret-position="345">
+              <caret line="23" column="38" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="38" />
               <folding>
-                <element signature="e#270#296#0" expanded="true" />
+                <element signature="e#0#9#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -115,8 +76,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Utilities.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="975">
-              <caret line="65" column="35" selection-start-line="65" selection-start-column="35" selection-end-line="65" selection-end-column="35" />
+            <state relative-caret-position="255">
+              <caret line="17" column="28" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -125,10 +86,31 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Filesystem.py">
+        <entry file="file://$PROJECT_DIR$/Training.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="9" selection-start-column="9" selection-end-column="9" />
+            <state relative-caret-position="435">
+              <caret line="29" column="79" selection-start-line="29" selection-start-column="79" selection-end-line="29" selection-end-column="79" />
+              <folding>
+                <element signature="e#0#16#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/PrepareCorpus.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="9" selection-start-line="6" selection-start-column="9" selection-end-line="6" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -144,7 +126,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>in</find>
       <find>forward(</find>
       <find>Mem</find>
       <find>corpus</find>
@@ -167,6 +148,14 @@
       <find>self</find>
       <find>cutoff_va</find>
       <find>cutoff_values</find>
+      <find>from data_utils</find>
+      <find>eval_step</find>
+      <find>tgt_</find>
+      <find>head_pro</find>
+      <find>forward</find>
+      <find>.crit(pred_hid.view(-1, pred_hid.size(-1)), target.view(-1))</find>
+      <find>forward(self, hidden, target, keep_order=False)</find>
+      <find>F.</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -181,17 +170,24 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/transformer-xl/pytorch/eval.py" />
-        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/__init__.py" />
         <option value="$PROJECT_DIR$/transformer-xl/pytorch/mem_transformer.py" />
-        <option value="$PROJECT_DIR$/WordPrediction.py" />
         <option value="$PROJECT_DIR$/PrepareCorpus.py" />
+        <option value="$PROJECT_DIR$/transformer-xl/pytorch/data_utils.py" />
+        <option value="$PROJECT_DIR$/WordPredictionExample.py" />
+        <option value="$PROJECT_DIR$/TXL.py" />
+        <option value="$PROJECT_DIR$/WordPrediction.py" />
+        <option value="$PROJECT_DIR$/WordPredictionCore.py" />
         <option value="$PROJECT_DIR$/Filesystem.py" />
+        <option value="$PROJECT_DIR$/Training.py" />
         <option value="$PROJECT_DIR$/Utilities.py" />
         <option value="$PROJECT_DIR$/Input.py" />
+        <option value="$PROJECT_DIR$/LM_TXL.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
     <option name="y" value="23" />
     <option name="width" value="2560" />
     <option name="height" value="1341" />
@@ -233,7 +229,12 @@
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Text_Corpuses/Danish_Wiki" />
+      <recent name="$PROJECT_DIR$/Text_Corpuses" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/transformer-xl/pytorch" />
       <recent name="$PROJECT_DIR$/transformer-xl" />
@@ -265,23 +266,23 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="804" extended-state="6" />
+    <frame x="0" y="23" width="2560" height="1341" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2746781" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12907068" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286517" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39871898" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.3286517" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.3286517" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Python Console" order="10" visible="true" weight="0.3272472" />
+      <window_info anchor="bottom" id="Python Console" order="10" visible="true" weight="0.15132105" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -299,69 +300,105 @@
     <entry file="file://$PROJECT_DIR$/transformer-xl/pytorch/__init__.py" />
     <entry file="file://$PROJECT_DIR$/transformer-xl/__init__.py" />
     <entry file="file://$PROJECT_DIR$/transformer-xl/pytorch/utils/__init__.py" />
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="20" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/transformer-xl/LICENSE" />
     <entry file="file://$PROJECT_DIR$/transformer-xl/pytorch/run_wt2_base.sh" />
-    <entry file="file://$PROJECT_DIR$/transformer-xl/pytorch/eval.py" />
-    <entry file="file://$PROJECT_DIR$/transformer-xl/pytorch/mem_transformer.py" />
-    <entry file="file://$PROJECT_DIR$/transformer-xl/pytorch/utils/proj_adaptive_softmax.py" />
     <entry file="file://$PROJECT_DIR$/Prediction/Prediction_Core.py" />
     <entry file="file://$PROJECT_DIR$/transformer-xl/pytorch/utils/vocabulary.py" />
-    <entry file="file://$PROJECT_DIR$/transformer-xl/pytorch/data_utils.py" />
     <entry file="file://$PROJECT_DIR$/transformer-xl/pytorch/utils/log_uniform_sampler.py" />
-    <entry file="file://$PROJECT_DIR$/transformer-xl/pytorch/train.py">
+    <entry file="file://$PROJECT_DIR$/CustomTokenizer.py" />
+    <entry file="file://$PROJECT_DIR$/Input-make_dataset_splits.log">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$USER_HOME$/opt/anaconda3/lib/python3.7/posixpath.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="33" column="43" selection-start-line="33" selection-start-column="43" selection-end-line="33" selection-end-column="43" />
+        <state relative-caret-position="126">
+          <caret line="95" selection-start-line="95" selection-end-line="95" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CustomTokenizer.py">
+    <entry file="file://$USER_HOME$/opt/anaconda3/lib/python3.7/subprocess.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-66">
+        <state relative-caret-position="306">
+          <caret line="774" selection-start-line="774" selection-end-line="774" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/transformer-xl/pytorch/run_wt103_base.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="11" lean-forward="true" selection-start-line="26" selection-start-column="11" selection-end-line="26" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/transformer-xl/tf/train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="373">
+          <caret line="92" column="28" selection-start-line="92" selection-start-column="28" selection-end-line="92" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/transformer-xl/tf/tpu_estimator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="106">
+          <caret line="226" lean-forward="true" selection-start-line="226" selection-end-line="226" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/transformer-xl/pytorch/train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="576">
+          <caret line="104" column="36" lean-forward="true" selection-start-line="104" selection-start-column="21" selection-end-line="104" selection-end-column="36" />
           <folding>
-            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#16#31#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/transformer-xl/pytorch/eval.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/transformer-xl/pytorch/data_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="192" column="20" lean-forward="true" selection-start-line="192" selection-start-column="20" selection-end-line="192" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/transformer-xl/pytorch/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/transformer-xl/pytorch/mem_transformer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3865">
+          <caret line="736" column="42" selection-start-line="736" selection-start-column="8" selection-end-line="736" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/transformer-xl/pytorch/utils/proj_adaptive_softmax.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="11" column="33" lean-forward="true" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="33" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Filesystem.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="9" selection-start-column="9" selection-end-column="9" />
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/Utilities.py">
+    <entry file="file://$PROJECT_DIR$/WordPredictionExample.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="975">
-          <caret line="65" column="35" selection-start-line="65" selection-start-column="35" selection-end-line="65" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PrepareCorpus.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-295">
-          <caret line="28" column="26" selection-start-line="28" selection-start-column="26" selection-end-line="28" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WordPrediction.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="181" column="37" selection-start-line="177" selection-start-column="4" selection-end-line="181" selection-end-column="37" />
+        <state relative-caret-position="675">
+          <caret line="45" column="17" selection-start-line="45" selection-start-column="17" selection-end-line="45" selection-end-column="17" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
@@ -370,11 +407,62 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Input.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="56" column="8" selection-start-line="56" selection-start-column="8" selection-end-line="56" selection-end-column="8" />
+        <state relative-caret-position="45">
+          <caret line="3" column="14" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WordPredictionCore.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="735">
+          <caret line="49" column="17" selection-start-line="49" selection-start-column="17" selection-end-line="49" selection-end-column="17" />
           <folding>
-            <element signature="e#270#296#0" expanded="true" />
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LM_TXL.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="38" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Utilities.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="28" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Training.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="29" column="79" selection-start-line="29" selection-start-column="79" selection-end-line="29" selection-end-column="79" />
+          <folding>
+            <element signature="e#0#16#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PrepareCorpus.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="9" selection-start-line="6" selection-start-column="9" selection-end-line="6" selection-end-column="9" />
         </state>
       </provider>
     </entry>

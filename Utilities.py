@@ -3,11 +3,25 @@ import sys
 import matplotlib.pyplot as plt
 import numpy as np
 import subprocess
+import os
+import torch
 
+######## Constants #######
 NUM_DISPLAYED = 10
 UNK_TOKEN = '<unk>'
 EOS_TOKEN = "<eos>"
 PAD_TOKEN = "<pad>"
+
+DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+####### Filesystem #######
+DATASETS_FOLDER = 'Datasets'
+
+WIKITEXT_103 = 'WikiText-103'
+DANISH_WIKI = 'Danish_Wiki'
+
+
+####### Logging ########
 
 def init_logging(logfilename, loglevel=logging.INFO):
   for handler in logging.root.handlers[:]:
@@ -20,7 +34,7 @@ def init_logging(logfilename, loglevel=logging.INFO):
       outlog_h.setLevel(loglevel)
       logging.getLogger().addHandler(outlog_h)
 
-#######
+
 # Time measurements
 def log_chronometer(time_measurements):
   logging.info("Time analysis:")
@@ -28,46 +42,15 @@ def log_chronometer(time_measurements):
     t1 = time_measurements[i]
     t2 = time_measurements[i + 1]
     logging.info('t' + str(i + 1) + ' - t' + str(i) + ' = ' + str(round(t2 - t1, 5)))
-
-
-# ##### Cleaning up special characters from the output
-# def adjust_puncts(line):
-#   # simple rules of detokenization
-#
-#   line = line.replace(' @-@ ', '-')
-#   line = line.replace(' @,@ ', ',')
-#   line = line.replace(' @.@ ', '.')
-#   line = line.replace(' . ', '. ')
-#   line = line.replace(' , ', ', ')
-#   line = line.replace(' : ', ': ')
-#   line = line.replace(' ; ', '; ')
-#   line = line.replace(" 's ", "'s ")
-#   line = line.replace(' ( ', ' (')
-#   line = line.replace(' ) ', ') ')
-#   return line
-#
-# def format_text(tokens):
-#   line = ''
-#   for token in tokens:
-#     if token == '<eos>':
-#       line += '\n'
-#     else:
-#       line += token
-#       line += ' '
-#   line = adjust_puncts(line)
-#   return line
-#
-#
-#
-# #########
-# # Exception for early stopping
-# class EarlyStoppingException(Exception):
-#     def __init__(self, message=""):
-#         super().__init__(message)
-
-
 ########
-# Drawing graphs
+
+def create_folders_ifneeded(folderpaths_ls):
+    for folderpath in folderpaths_ls:
+        if not(os.path.isdir(folderpath)):
+            os.makedirs(folderpath)
+
+
+######## Drawing graphs #########
 
 def display_ygraph_fromfile(npy_fpath, axis_labels=None):
   data_y_array = np.load(npy_fpath, allow_pickle=True)
