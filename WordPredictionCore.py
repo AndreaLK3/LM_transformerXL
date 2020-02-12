@@ -63,29 +63,40 @@ def get_logits(p_a_logsoftmax, hidden, target, keep_order=False):
         head_weight, head_bias, head_proj = weights[0], biases[0], p_a_logsoftmax.out_projs[0]
 
         head_logit = p_a_logsoftmax._compute_logit(hidden, head_weight, head_bias, head_proj)
-        logit_all = head_logit[0:cutoff_values[1]]
+        # print("head_logit.shape = " + str(head_logit.shape))
+        head_indices = torch.tensor(range(cutoff_values[1])).to(DEVICE)
+        logit_all = head_logit.index_select(dim=2, index=head_indices)
+        # print("logit_all.shape = " + str(logit_all.shape))
+        # head_prob = F.softmax(head_logit, dim=1)
 
         for i in range(len(cutoff_values) - 1):
             l_idx, r_idx = cutoff_values[i], cutoff_values[i + 1]
 
-            mask_i = (target >= l_idx) & (target < r_idx) # the target must be in one of the sections after the first
+            #mask_i = (target >= l_idx) & (target < r_idx) # the target must be in one of the sections after the first
+            mask_i = torch.tensor([[True]]).to(DEVICE)
             indices_i = mask_i.nonzero().squeeze()
             #print("indices_i = " + str(indices_i))
 
-            if indices_i.numel() == 0:
-                continue
+            # I remove the restriction over the softmax that depends on the label
+            # if indices_i.numel() == 0:
+            #     continue
+
+            # target_i = target.index_select(0, indices_i) - l_idx
+            # head_prob_i = head_prob.index_select(0, indices_i)
 
             if i == 0:
-                pass # logprob_i = head_logprob_i.gather(1, target_i[:,None]).squeeze(1)
+                pass # prob_i = head_prob_i.gather(1, target_i[:,None]).squeeze(1)
             else:
                 weight_i, bias_i, proj_i = weights[i], biases[i], p_a_logsoftmax.out_projs[i]
+
 
                 hidden_i = hidden.index_select(0, indices_i)
 
                 tail_logit_i = p_a_logsoftmax._compute_logit(hidden_i, weight_i, bias_i, proj_i)
-                # must still refine ?
-                print("tail_logit_i.shape = " + str(tail_logit_i.shape))
-                logit_all = torch.cat([logit_all, tail_logit_i], dim=0)
+
+                # print("tail_logit_i.shape = " + str(tail_logit_i.shape))
+                logit_all = torch.cat([logit_all, tail_logit_i[0].unsqueeze(0)], dim=2)
+                # print("logit_all.shape = " + str(logit_all.shape))
 
     return logit_all
 
@@ -132,9 +143,6 @@ def predict(model, vocabulary, context_tokens, labels_shape=(1,1)):
 
     labels= torch.ones(size=(1,1)).to(torch.int64).to(DEVICE) # placeholder label, to specify that we are predicting the next token (or possibly more)
     top_probs, top_indices = get_probabilities(model, data=ctx_tensor, target=labels)
-
-    print(top_probs)
-    print(top_indices)
 
     # we have a choice. To visualize it, go from vocabulary indices to words:
     top_words = list(
