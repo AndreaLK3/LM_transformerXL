@@ -18,7 +18,7 @@ def train(dataset):
                     'train.py',
                     '--cuda',
                     '--data',
-                    dataset[0], # the dataset_dirpath. The original default was: ../data/wikitext-103/
+                    os.path.join('..','..',dataset.value[0]), # the dataset_dirpath. The original default was: ../data/wikitext-103/
                     '--dataset',
                     'wt103', # since it can only be a choice of: choices=['wt103', 'lm1b', 'enwik8', 'text8']
                     '--adaptive',

@@ -64,7 +64,7 @@ class LM_TransformerXL():
         # 6) Logging, on CSV and graph
         if self.flag_verbose:
             Rr.write_nextwords_incsv(self.context, self.proposed_nextwords, self.probabilities)
-            Rr.create_graphs(self.context_tokens, self.proposed_nextwords, self.probabilities.cpu())
+            Rr.create_graphs(self.context_tokens, self.proposed_nextwords, self.probabilities.cpu().tolist())
             logging.info(self.proposed_nextwords)
             logging.info(self.probabilities)
 

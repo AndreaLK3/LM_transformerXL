@@ -69,6 +69,9 @@ def reunite_corpus_splits(clean_wiki_dirpath, output_dirpath):
             elif (0.25 * tot_files) < i < (0.3 * tot_files): # i > 0.9*tot_files
                 out_test_file.write(in_subfile_text)
 
+    out_train_file.write(' ' + Utils.UNK_TOKEN + ' ') # we add it if the corpus does not have it.
     out_train_file.close()
+    out_valid_file.write(' ' + Utils.UNK_TOKEN + ' ')
     out_valid_file.close()
+    out_test_file.write(' ' + Utils.UNK_TOKEN + ' ')
     out_test_file.close()
