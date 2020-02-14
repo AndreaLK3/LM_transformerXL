@@ -102,6 +102,7 @@ def get_logits(p_a_logsoftmax, hidden, target, keep_order=False):
 
 
 ##### Modified from: transformer-xl/pytorch/mem_transformer >> MemTransformerLM.forward(self, data, target, *mems)
+##### runs the model,
 def get_probabilities(txl_model, data, target, *mems):
     # nn.DataParallel does not allow size(0) tensors to be broadcasted.
     # So, have to initialize size(0) mems inside the model forward.
@@ -122,26 +123,22 @@ def get_probabilities(txl_model, data, target, *mems):
 
     logits = logits.squeeze()
 
-    filtered_logits = top_k_top_p_filtering(logits, top_k=10)
+    num_preselected = 20
+    filtered_logits = top_k_top_p_filtering(logits, top_k=num_preselected)
 
     sorted_logits, sorted_indices = torch.sort(filtered_logits, descending=True)
     sorted_probs = F.softmax(sorted_logits, dim=-1)
-    top_probs = sorted_probs[0:10]
-    top_indices = sorted_indices[0:10]
-
-    loss = txl_model.crit(pred_hid.view(-1, pred_hid.size(-1)), target.view(-1))
-    # loss = loss.view(tgt_len, -1)
+    top_probs = sorted_probs[0:num_preselected]
+    top_indices = sorted_indices[0:num_preselected]
 
     return top_probs, top_indices
 
 
 ########## Entry point function
 def predict(model, vocabulary, context_tokens, labels_shape=(1,1)):
-    inverse_example = "<unk> is an English film, television and theatre actor . He had"
     ctx_tensor = vocabulary.convert_to_tensor(context_tokens).unsqueeze(0).t().to(torch.int64).to(DEVICE)
-    print(ctx_tensor.shape)
 
-    labels= torch.ones(size=(1,1)).to(torch.int64).to(DEVICE) # placeholder label, to specify that we are predicting the next token (or possibly more)
+    labels= torch.ones(size=labels_shape).to(torch.int64).to(DEVICE) # placeholder label, to specify that we are predicting the next token (or possibly more)
     top_probs, top_indices = get_probabilities(model, data=ctx_tensor, target=labels)
 
     # we have a choice. To visualize it, go from vocabulary indices to words:
@@ -149,4 +146,10 @@ def predict(model, vocabulary, context_tokens, labels_shape=(1,1)):
         map(lambda i_tensor: vocabulary.convert_to_sent([i_tensor.item()]),  # , skip_special_tokens=True
             top_indices))
 
-    return top_words, top_probs
+    tokens_to_exclude = [sign for sign in string.punctuation] + [Utils.UNK_TOKEN]
+    indices_to_include = [i for i in range(len(top_words)) if top_words[i] not in tokens_to_exclude]
+
+    probs = top_probs.index_select(0, torch.tensor(indices_to_include).to(torch.int64).to(DEVICE))
+    words = [top_words[i] for i in indices_to_include]
+
+    return words[0:Utils.NUM_DISPLAYED], probs[0:Utils.NUM_DISPLAYED]

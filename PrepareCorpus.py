@@ -3,6 +3,7 @@ import logging
 import os
 import subprocess
 import re
+import CustomTokenizer as CT
 
 
 ### Step 1
@@ -60,18 +61,37 @@ def reunite_corpus_splits(clean_wiki_dirpath, output_dirpath):
     out_test_file = open(os.path.join(output_dirpath, 'test.txt'),'w')
 
     for i in range(tot_files):
-        with open(clean_wiki_fpaths[i] , 'r') as in_subfile:
+        with open(clean_wiki_fpaths[i], 'r') as in_subfile:
             in_subfile_text = in_subfile.read()
-            if i < 0.2 * tot_files:# i < (0.8 * tot_files):
+            if i < 0.8 * tot_files:
                 out_train_file.write(in_subfile_text)
-            elif (0.2 * tot_files) < i < (0.25 * tot_files): # (0.8 * tot_files) < i < (0.9 * tot_files):
+            elif (0.8 * tot_files) < i < (0.9 * tot_files):
                 out_valid_file.write(in_subfile_text)
-            elif (0.25 * tot_files) < i < (0.3 * tot_files): # i > 0.9*tot_files
+            elif i > 0.9*tot_files:
                 out_test_file.write(in_subfile_text)
 
-    out_train_file.write(' ' + Utils.UNK_TOKEN + ' ') # we add it if the corpus does not have it.
     out_train_file.close()
-    out_valid_file.write(' ' + Utils.UNK_TOKEN + ' ')
     out_valid_file.close()
-    out_test_file.write(' ' + Utils.UNK_TOKEN + ' ')
     out_test_file.close()
+
+
+### Step 4: Postprocessing (spacing out punctuation, tokenizing, and inserting <unk> tokens in the place of rare words.
+def postprocess_corpus(dataset_dirpath, min_frequency):
+
+    train_fpath = os.path.join(dataset_dirpath, 'train.txt')
+    valid_fpath = os.path.join(dataset_dirpath, 'valid.txt')
+    test_fpath = os.path.join(dataset_dirpath, 'test.txt')
+    in_fpaths = [train_fpath, valid_fpath, test_fpath]
+
+    # Tokenize:
+    for in_fpath in in_fpaths:
+        CT.spaceout_tokens_in_text_file(in_fpath)
+
+    # the dictionary of frequencies is built on the training set
+    frequency_dictionary = CT.count_file(in_fpaths)
+
+    # Replace rare words with <unk> tokens
+    for in_fpath in in_fpaths:
+        CT.insert_unk_in_text(in_fpath, frequency_dictionary, min_frequency)
+
+

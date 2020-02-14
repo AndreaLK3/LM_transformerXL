@@ -1,7 +1,7 @@
 import logging
 import sys
-import matplotlib.pyplot as plt
-import numpy as np
+import string
+import re
 import subprocess
 import os
 import torch
@@ -51,39 +51,6 @@ def create_folders_ifneeded(folderpaths_ls):
         if not(os.path.isdir(folderpath)):
             os.makedirs(folderpath)
 
-
-
-
-######## Drawing graphs #########
-
-def display_ygraph_fromfile(npy_fpath, axis_labels=None):
-  data_y_array = np.load(npy_fpath, allow_pickle=True)
-  plt.plot(data_y_array)
-  plt.xticks(range(0, len(data_y_array), 1))
-  plt.yticks(range(0, int(max(data_y_array)) + 1, 1))
-  plt.xlim((0, len(data_y_array)))
-  plt.ylim((0, max(data_y_array)))
-  plt.grid(b=True, color='lightgrey', linestyle='-', linewidth=0.5)
-  if axis_labels is not None:
-    plt.xlabel(axis_labels[0])
-    plt.ylabel(axis_labels[1])
-
-
-# For now, intended to be use with training_losses and validation_losses
-def display_xygraph_from_files(npy_fpaths_ls):
-  overall_max = 0
-  legend_labels = ['Training loss', 'Validation loss']
-  for i in range(len(npy_fpaths_ls)):
-    npy_fpath = npy_fpaths_ls[i]
-    xy_lts_array = np.load(npy_fpath, allow_pickle=True)
-    plt.plot(xy_lts_array.transpose()[0], xy_lts_array.transpose()[1], label=legend_labels[i])
-    array_max = max(xy_lts_array.transpose()[1])
-    overall_max = array_max if array_max > overall_max else overall_max
-  plt.ylim((0, overall_max))
-  ax = plt.axes()
-  ax.legend()
-
-
 ##### Check GPU memory usage
 def get_gpu_memory_map():
     """Get the current gpu usage.
@@ -103,3 +70,5 @@ def get_gpu_memory_map():
     gpu_memory = [int(x) for x in result.strip().split('\n')]
     gpu_memory_map = dict(zip(range(len(gpu_memory)), gpu_memory))
     return gpu_memory_map
+
+

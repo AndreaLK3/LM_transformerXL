@@ -24,9 +24,9 @@ def check_dataset_splits_present(dataset_dirpath):
 #####
 
 
-##### Generic function to gather the text from the wiki dump of a given language
-def make_dataset_splits(dataset):
 
+### Generic function to gather the text from the wiki dump of a given language
+def make_dataset_splits(dataset, words_min_frequency=5):
     dataset_dirpath, wikidump_fname = dataset.value
 
     if not check_dataset_splits_present(dataset_dirpath):
@@ -41,9 +41,14 @@ def make_dataset_splits(dataset):
 
         PC.reunite_corpus_splits(clean_wiki_dirpath, dataset_dirpath)
         logging.info("Dataset splits created at: " + dataset_dirpath)
+
+        PC.postprocess_corpus(dataset_dirpath, words_min_frequency)
+        logging.info("Corpus files tokenized and post-processed")
+
     else:
         logging.info("Dataset splits train.txt, valid.txt, test.txt already present at : " + dataset_dirpath +
-                     " for the dataset from: " + str(wikidump_fname) )
+                     " for the dataset from: " + str(wikidump_fname))
+
 #####
 
 

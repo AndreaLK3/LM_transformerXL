@@ -4,11 +4,18 @@ from io import open
 
 import numpy as np
 import pandas as pd
-from matplotlib import pyplot as plt
+import matplotlib
+# Force matplotlib to not use any Xwindows backend, to avoid errors when executing on remote from command line
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
 from Utilities import NUM_DISPLAYED
 import Utilities as Utils
 
+
+##### Text output #####
+
 ##### Cleaning up special characters from the output
+
 def adjust_puncts(line):
   # simple rules of detokenization
 
@@ -64,11 +71,13 @@ def write_nextwords_incsv(context, nextwords, probs_tensor):
 
 ######
 
+
+###### Building graphs of predicted words and probabilities #####
+
 # Build a pyplot graph that show the probabilities for choosing the next word, as produced by the Transformer-XL LM
 def create_graphs(context_tokens, words, probs):
   saves_directory = Utils.DIR_WORDPROBABILITIES
 
-  print(context_tokens)
   context_adjusted = [ token if token!='<eos>' else "\n" for token in context_tokens[-128:] ]
   context_printable = " ".join(context_adjusted)
   context_to_display = "Preceding context: \n\n" + "\"" + context_printable
@@ -101,3 +110,35 @@ def create_filename(part_name, context, extension):
   day_hour_minute = "_".join([d.strftime("%j"), d.strftime("%H"), d.strftime("%M")])
   filename = day_hour_minute + '_' +part_name + '_' +str(context[-12:]) + '_' + extension
   return filename
+
+########
+
+
+######## Drawing graphs of losses #########
+
+def display_ygraph_fromfile(npy_fpath, axis_labels=None):
+  data_y_array = np.load(npy_fpath, allow_pickle=True)
+  plt.plot(data_y_array)
+  plt.xticks(range(0, len(data_y_array), 1))
+  plt.yticks(range(0, int(max(data_y_array)) + 1, 1))
+  plt.xlim((0, len(data_y_array)))
+  plt.ylim((0, max(data_y_array)))
+  plt.grid(b=True, color='lightgrey', linestyle='-', linewidth=0.5)
+  if axis_labels is not None:
+    plt.xlabel(axis_labels[0])
+    plt.ylabel(axis_labels[1])
+
+
+# For now, intended to be use with training_losses and validation_losses
+def display_xygraph_from_files(npy_fpaths_ls):
+  overall_max = 0
+  legend_labels = ['Training loss', 'Validation loss']
+  for i in range(len(npy_fpaths_ls)):
+    npy_fpath = npy_fpaths_ls[i]
+    xy_lts_array = np.load(npy_fpath, allow_pickle=True)
+    plt.plot(xy_lts_array.transpose()[0], xy_lts_array.transpose()[1], label=legend_labels[i])
+    array_max = max(xy_lts_array.transpose()[1])
+    overall_max = array_max if array_max > overall_max else overall_max
+  plt.ylim((0, overall_max))
+  ax = plt.axes()
+  ax.legend()
