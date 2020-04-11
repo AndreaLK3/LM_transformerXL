@@ -1,9 +1,5 @@
-import os
-import importlib
 import torch
-import Input
 import logging
-import re
 import Utilities as Utils
 import string
 import torch.nn.functional as F
@@ -146,7 +142,7 @@ def predict(model, vocabulary, context_tokens, labels_shape=(1,1)):
         map(lambda i_tensor: vocabulary.convert_to_sent([i_tensor.item()]),  # , skip_special_tokens=True
             top_indices))
 
-    tokens_to_exclude = [sign for sign in string.punctuation] + [Utils.UNK_TOKEN]
+    tokens_to_exclude = [sign for sign in string.punctuation] + ['”'] + [Utils.UNK_TOKEN, Utils.EOS_TOKEN]
     indices_to_include = [i for i in range(len(top_words)) if top_words[i] not in tokens_to_exclude]
 
     probs = top_probs.index_select(0, torch.tensor(indices_to_include).to(torch.int64).to(DEVICE))

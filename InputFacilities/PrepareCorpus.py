@@ -1,9 +1,8 @@
 import Utilities as Utils
-import logging
 import os
 import subprocess
 import re
-import CustomTokenizer as CT
+from InputFacilities import CustomTokenizer as CT
 
 
 ### Step 1

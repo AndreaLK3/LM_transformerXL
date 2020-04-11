@@ -1,7 +1,7 @@
 import os
 import importlib
 import torch
-import Input
+from InputFacilities import Input
 import logging
 import re
 import Utilities as Utils
@@ -9,6 +9,7 @@ import regex
 import sys
 import RecordResults as Rr
 import WordPredictionCore as Wpc
+import string
 from Utilities import DEVICE
 
 
@@ -50,6 +51,7 @@ class LM_TransformerXL():
 
         # 2) From the whole text, extract the context for the prediction
         self.context = select_context(self.all_text)
+        self.context = re.sub('(['+string.punctuation+'])', r' \1 ', self.context)  # separating the punctuation signs
 
         # 3) Tokenize the context
         self.context_tokens = self.vocabulary.tokenize(self.context)
@@ -128,7 +130,7 @@ def select_context(all_text):
     else:
         context = m.group(0)
     if len(context)==len(all_text):
-        context = context + " " # we want the next word after the end of the text, not the completion of the last
+        context = context + " "  # we want the next word after the end of the text, not the completion of the last
 
     return context
 ###

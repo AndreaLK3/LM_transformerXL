@@ -1,0 +1,8 @@
+04/11/2020 06:49:22 PM -INFO : *********
+['Kan', 'du', 'godt', 'ligge', 'rødbeder', '?']
+*********
+04/11/2020 06:49:22 PM -INFO : Last character in the context:  
+04/11/2020 06:49:22 PM -INFO : Out-of-word setting: True
+04/11/2020 06:49:23 PM -INFO : ['Hvorfor', 'Ja', 'Du', '–', 'Det', 'Og', 'Husk', 'Hey', 'Vi', 'Her']
+04/11/2020 06:49:23 PM -INFO : tensor([0.0317, 0.0294, 0.0227, 0.0201, 0.0187, 0.0161, 0.0150, 0.0104, 0.0101,
+        0.0092], grad_fn=<SliceBackward>)
