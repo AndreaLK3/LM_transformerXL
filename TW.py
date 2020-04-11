@@ -41,7 +41,7 @@ class LM_TransformerXL():
 
     ########## Given a position, select the context and predict the next word
     def predict(self, input_text_manual=""):
-        Utils.init_logging('temp.log')
+        Utils.init_logging('TW_predictions.log')
         # If we used flag_text_or_manual=False in the constructor, the model object accepts manual input text
 
         # 1) Loads the input text.
@@ -85,7 +85,7 @@ def load_model_and_vocab(dataset_dirpath):
         torch.save(text_corpus, corpus_fpath)
 
     vocabulary = text_corpus.vocab
-    vocabulary.unk_idx = vocabulary.sym2idx['<unk>']
+    vocabulary.unk_idx = vocabulary.sym2idx['<UNK>']
 
     txl_model = get_txl_model(dataset_dirpath)
 
@@ -102,7 +102,10 @@ def get_txl_model(dataset_dirpath):
         # adjusting the sys.path to allow us to load a model that is not in transformer-xl/pytorch
         sys.path.append(os.path.join(os.getcwd(), 'transformer-xl', 'pytorch'))
         sys.path.append(os.path.join(os.getcwd(), 'transformer-xl', 'pytorch', 'utils'))
-        txl_model = torch.load(model_fpath)
+        if torch.cuda.is_available():
+            txl_model = torch.load(model_fpath)
+        else:
+            txl_model = torch.load(model_fpath, map_location=torch.device('cpu'))
         return txl_model
     else:
         logging.info("Model not present. We must train it on the specified dataset and select the best version")

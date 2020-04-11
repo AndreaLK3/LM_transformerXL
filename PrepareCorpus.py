@@ -11,7 +11,7 @@ import CustomTokenizer as CT
 ### into multiple folders (e.g. AA, AB, etc.) with files wiki_00, wiki_01, etc.. Each files has multiple <doc>s
 def create_text_from_wikidump(path_to_wiki_dump, dataset_dirpath):
     path_to_wikiextractor = os.path.join('wikiextractor', 'WikiExtractor.py')
-    path_to_dest_folder = os.path.join(dataset_dirpath,'plain_wiki')
+    path_to_dest_folder = os.path.join(dataset_dirpath, Utils.SOURCES_FOLDER, 'plain_wiki')
     cmd = ['python2',
            path_to_wikiextractor,
            '--no_templates',
@@ -52,7 +52,7 @@ def refine_wikitext(plain_wiki_fpath, input_subdirectory, output_dirpath):
 
 
 ### Step 3: Reunite all the files in clean_wiki into training-validation-test (80-10-10), so we can use iterators
-def reunite_corpus_splits(clean_wiki_dirpath, output_dirpath):
+def reunite_corpus_splits(clean_wiki_dirpath, output_dirpath, fraction_included_dataset):
 
     clean_wiki_fpaths = sorted([os.path.join(clean_wiki_dirpath, fname) for fname in os.listdir(clean_wiki_dirpath)])
     tot_files = len(clean_wiki_fpaths)
@@ -63,11 +63,11 @@ def reunite_corpus_splits(clean_wiki_dirpath, output_dirpath):
     for i in range(tot_files):
         with open(clean_wiki_fpaths[i], 'r') as in_subfile:
             in_subfile_text = in_subfile.read()
-            if i < 0.8 * tot_files:
+            if i < 0.8 * tot_files * fraction_included_dataset:
                 out_train_file.write(in_subfile_text)
-            elif (0.8 * tot_files) < i < (0.9 * tot_files):
+            elif (0.8 * tot_files * fraction_included_dataset) < i < (0.9 * tot_files * fraction_included_dataset):
                 out_valid_file.write(in_subfile_text)
-            elif i > 0.9*tot_files:
+            elif (0.9 * tot_files * fraction_included_dataset) < i < (1 * tot_files * fraction_included_dataset):
                 out_test_file.write(in_subfile_text)
 
     out_train_file.close()

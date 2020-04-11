@@ -4,11 +4,12 @@ import string
 import re
 import subprocess
 import os
+import nltk
 import torch
 
 ######## Constants #######
 NUM_DISPLAYED = 10
-UNK_TOKEN = '<unk>'
+UNK_TOKEN = '<UNK>'
 EOS_TOKEN = "<eos>"
 PAD_TOKEN = "<pad>"
 
@@ -16,9 +17,10 @@ DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 ####### Filesystem #######
 DATASETS_FOLDER = 'Datasets'
-
+SOURCES_FOLDER = 'Sources'
 WIKITEXT_103 = 'WikiText-103'
-DANISH_WIKI = 'Danish_Wiki'
+DANISH = 'Danish'
+SPANISH = "Spanish"
 
 DIR_WORDPROBABILITIES = 'candidate next words'
 
@@ -44,12 +46,40 @@ def log_chronometer(time_measurements):
     t1 = time_measurements[i]
     t2 = time_measurements[i + 1]
     logging.info('t' + str(i + 1) + ' - t' + str(i) + ' = ' + str(round(t2 - t1, 5)))
+
+
+# Utility for processing entities, word embeddings & co
+def count_tokens_in_corpus(corpus_txt_filepath, include_punctuation):
+
+    file = open(corpus_txt_filepath, "r") # encoding="utf-8"
+    tot_tokens = 0
+
+    for i, line in enumerate(file):
+        if line == '':
+            break
+        # tokens_in_line = nltk.tokenize.word_tokenize(line)
+        line_noPuncts = re.sub('['+string.punctuation.replace('-', '')+']', ' ', line)
+        if not (include_punctuation):
+            the_line = line_noPuncts
+        else:
+            the_line = line
+        tokens_in_line = nltk.tokenize.word_tokenize(the_line)
+        tot_tokens = tot_tokens + len(tokens_in_line)
+
+        if i % 2000 == 0:
+            print("Reading in line n. : " + str(i) + ' ; number of tokens encountered: ' + str(tot_tokens))
+
+    file.close()
+
+    return tot_tokens
 ########
 
+######## Filesystem utilities
 def create_folders_ifneeded(folderpaths_ls):
     for folderpath in folderpaths_ls:
         if not(os.path.isdir(folderpath)):
             os.makedirs(folderpath)
+
 
 ##### Check GPU memory usage
 def get_gpu_memory_map():
