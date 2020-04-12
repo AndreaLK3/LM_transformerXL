@@ -2,17 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e67c8beb-52bc-4652-8ee6-c963604a3af3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/run_LM_prediction.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/transformer-xl/__init__.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/transformer-xl/pytorch/__init__.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/transformer-xl/pytorch/utils/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CustomTokenizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/InputFacilities/CustomTokenizer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Input.py" beforeDir="false" afterPath="$PROJECT_DIR$/InputFacilities/Input.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PrepareCorpus.py" beforeDir="false" afterPath="$PROJECT_DIR$/InputFacilities/PrepareCorpus.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TW.py" beforeDir="false" afterPath="$PROJECT_DIR$/TW.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InputFacilities/Input.py" beforeDir="false" afterPath="$PROJECT_DIR$/InputFacilities/Input.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InputFacilities/PrepareCorpus.py" beforeDir="false" afterPath="$PROJECT_DIR$/InputFacilities/PrepareCorpus.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Training.py" beforeDir="false" afterPath="$PROJECT_DIR$/Training.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WordPredictionCore.py" beforeDir="false" afterPath="$PROJECT_DIR$/WordPredictionCore.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/transformer-xl" beforeDir="false" afterPath="$PROJECT_DIR$/transformer-xl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/transformer-xl/pytorch/data_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/transformer-xl/pytorch/data_utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/transformer-xl/pytorch/utils/proj_adaptive_softmax.py" beforeDir="false" afterPath="$PROJECT_DIR$/transformer-xl/pytorch/utils/proj_adaptive_softmax.py" afterDir="false" />
@@ -28,7 +24,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TW.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="810">
+            <state relative-caret-position="630">
               <caret line="54" selection-start-line="54" selection-end-line="54" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
@@ -46,13 +42,34 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/run_LM_prediction.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" column="8" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="8" />
+            <state relative-caret-position="225">
+              <caret line="15" column="24" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/InputFacilities/Input.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-501">
+              <caret line="38" column="48" selection-start-line="38" selection-start-column="48" selection-end-line="38" selection-end-column="48" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/InputFacilities/PrepareCorpus.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="364">
+              <caret line="76" column="34" selection-start-line="76" selection-start-column="34" selection-end-line="76" selection-end-column="34" />
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -71,9 +88,18 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Training.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="395">
+              <caret line="61" column="38" selection-start-line="61" selection-start-column="38" selection-end-line="61" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Utilities.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
+            <state relative-caret-position="60">
               <caret line="11" selection-start-line="11" selection-end-line="11" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
@@ -93,7 +119,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>tie_weight</find>
       <find>tied</find>
       <find>sample_logits</find>
       <find>out_layer</find>
@@ -123,6 +148,7 @@
       <find>unk_idx</find>
       <find>DataParallel</find>
       <find>cuda</find>
+      <find>0.05</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -155,12 +181,14 @@
         <option value="$PROJECT_DIR$/Utilities.py" />
         <option value="$PROJECT_DIR$/transformer-xl/pytorch/data_utils.py" />
         <option value="$PROJECT_DIR$/PrepareCorpus.py" />
-        <option value="$PROJECT_DIR$/Training.py" />
         <option value="$PROJECT_DIR$/transformer-xl/pytorch/utils/proj_adaptive_softmax.py" />
         <option value="$PROJECT_DIR$/Input.py" />
         <option value="$PROJECT_DIR$/WordPredictionCore.py" />
         <option value="$PROJECT_DIR$/TW.py" />
         <option value="$PROJECT_DIR$/run_LM_prediction.py" />
+        <option value="$PROJECT_DIR$/InputFacilities/Input.py" />
+        <option value="$PROJECT_DIR$/Training.py" />
+        <option value="$PROJECT_DIR$/InputFacilities/PrepareCorpus.py" />
       </list>
     </option>
   </component>
@@ -193,6 +221,11 @@
               <item name="LM_transformerXL" type="462c0819:PsiDirectoryNode" />
               <item name="Datasets" type="462c0819:PsiDirectoryNode" />
               <item name="WikiText-103" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LM_transformerXL" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LM_transformerXL" type="462c0819:PsiDirectoryNode" />
+              <item name="InputFacilities" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="LM_transformerXL" type="b2602c69:ProjectViewProjectNode" />
@@ -257,7 +290,7 @@
     <frame x="0" y="23" width="1440" height="801" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19170243" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19456366" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -442,42 +475,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Training.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="31" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#16#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/InputFacilities/Input.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="975">
-          <caret line="65" lean-forward="true" selection-start-line="65" selection-end-line="65" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/InputFacilities/CustomTokenizer.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-276">
           <caret line="21" column="50" selection-start-line="21" selection-start-column="50" selection-end-line="21" selection-end-column="50" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/InputFacilities/PrepareCorpus.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1035">
-          <caret line="69" column="97" lean-forward="true" selection-start-line="69" selection-start-column="97" selection-end-line="69" selection-end-column="97" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -501,7 +504,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/TW.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="810">
+        <state relative-caret-position="630">
           <caret line="54" selection-start-line="54" selection-end-line="54" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
@@ -516,6 +519,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Utilities.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/transformer-xl/pytorch/train.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -526,22 +539,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Utilities.py">
+    <entry file="file://$PROJECT_DIR$/Training.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="395">
+          <caret line="61" column="38" selection-start-line="61" selection-start-column="38" selection-end-line="61" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/InputFacilities/Input.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-501">
+          <caret line="38" column="48" selection-start-line="38" selection-start-column="48" selection-end-line="38" selection-end-column="48" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/run_LM_prediction.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="8" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="8" />
+        <state relative-caret-position="225">
+          <caret line="15" column="24" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/InputFacilities/PrepareCorpus.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="364">
+          <caret line="76" column="34" selection-start-line="76" selection-start-column="34" selection-end-line="76" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
           </folding>
         </state>
       </provider>

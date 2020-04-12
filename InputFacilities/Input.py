@@ -35,8 +35,8 @@ def add_nonwiki_sources(dataset_dirpath, fraction_included):
     for source_fpath in txt_sources_fpath:
         with open(source_fpath, 'r', encoding='utf-8') as f:
             lines = f.readlines()
-            num_source_lines_for_train = int(0.9*len(lines) * fraction_included)  # changed to 90% 5% 5% split
-            num_source_lines_for_valid = int(0.05*len(lines) * fraction_included)
+            num_source_lines_for_train = int(0.8*len(lines) * fraction_included)
+            num_source_lines_for_valid = int(0.1*len(lines) * fraction_included)
             text_to_add_train = "\n".join(lines[0:num_source_lines_for_train])
             text_to_add_valid = "\n".join(lines[num_source_lines_for_train:num_source_lines_for_train + num_source_lines_for_valid])
             text_to_add_test = "\n".join(lines[num_source_lines_for_train + num_source_lines_for_valid:num_source_lines_for_train + 2*num_source_lines_for_valid])

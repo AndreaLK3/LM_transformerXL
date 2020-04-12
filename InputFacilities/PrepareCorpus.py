@@ -3,7 +3,7 @@ import os
 import subprocess
 import re
 from InputFacilities import CustomTokenizer as CT
-
+import numpy as np
 
 ### Step 1
 ### create_text_from_wikidump(path_to_wiki_dump, destination_foldername), turns a .bz2 compressed archive
@@ -59,14 +59,22 @@ def reunite_corpus_splits(clean_wiki_dirpath, output_dirpath, fraction_included_
     out_valid_file = open(os.path.join(output_dirpath, 'valid.txt'),'w')
     out_test_file = open(os.path.join(output_dirpath, 'test.txt'),'w')
 
+    training_indices = np.random.choice(range(tot_files), size=int(0.8*tot_files*fraction_included_dataset),
+                                                 replace=False, p=None)
+    valid_and_test_subfiles_indices = np.random.choice(set(range(tot_files)).difference(set(training_indices)),
+                                                 size=int(0.2 * tot_files * fraction_included_dataset),
+                                                 replace=False, p=None)
+    validation_indices = valid_and_test_subfiles_indices[0: len(valid_and_test_subfiles_indices) // 2]
+    test_indices = valid_and_test_subfiles_indices[len(valid_and_test_subfiles_indices) // 2:]
+
     for i in range(tot_files):
         with open(clean_wiki_fpaths[i], 'r') as in_subfile:
             in_subfile_text = in_subfile.read()
-            if i < 0.8 * tot_files * fraction_included_dataset:
+            if i in training_indices:
                 out_train_file.write(in_subfile_text)
-            elif (0.8 * tot_files * fraction_included_dataset) < i < (0.9 * tot_files * fraction_included_dataset):
+            elif i in validation_indices:
                 out_valid_file.write(in_subfile_text)
-            elif (0.9 * tot_files * fraction_included_dataset) < i < (1 * tot_files * fraction_included_dataset):
+            elif i in test_indices:
                 out_test_file.write(in_subfile_text)
 
     out_train_file.close()

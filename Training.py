@@ -59,8 +59,8 @@ def train(dataset, min_frequency_forvocab=5, inputdataset_fraction=1):
                     '--multi_gpu',
                     '--gpu0_bsz',
                     '4',
-                    '--eval-interval', # changed by me from 4000
-                    '2000'
+                    '--eval-interval',
+                    '4000'
                     ]
 
     subprocess.call(bash_command)
