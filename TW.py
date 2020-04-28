@@ -22,7 +22,6 @@ class LM_TransformerXL():
 
     ########## Constructor
     # Current default choices are meant for the development phase: input from text file in the same folder
-    # The current version is not parameterized by language
     def __init__(self, dataset, flag_text_or_manual=True, input_filepath=".", flag_verbose=True):
 
         self.dataset_dirpath = (dataset.value)[0]
@@ -51,17 +50,19 @@ class LM_TransformerXL():
 
         # 2) From the whole text, extract the context for the prediction
         self.context = select_context(self.all_text)
-        self.context = re.sub('(['+string.punctuation+'])', r' \1 ', self.context)  # separating the punctuation signs
 
-        # 3) Tokenize the context
+        # 3) Determine if we are Out-Of-Word, or instead we are dealing with a prefix
+        self.outofword_setting = check_outofword_setting(self.context)
+
+        # 4) Space out and tokenize the context
+        self.context = re.sub('([' + string.punctuation + '])', r' \1 ',
+                              self.context)  # separating the punctuation signs
         self.context_tokens = self.vocabulary.tokenize(self.context)
         logging.info('*********\n' + str(self.context_tokens) + '\n*********')
 
-        # 4) Determine if we are Out-Of-Word, or instead we are dealing with a prefix
-        self.outofword_setting = check_outofword_setting(self.context)
-
         # 5) Compute the predictions, using the attributes & elements of this Language Model object
-        self.proposed_nextwords, self.probabilities = Wpc.predict(self.model, self.vocabulary, self.context_tokens)
+        self.proposed_nextwords, self.probabilities = Wpc.predict(self.model, self.vocabulary, self.context_tokens,
+                                                                  self.outofword_setting, self.context_tokens[-1])
 
         # 6) Logging, on CSV and graph
         if self.flag_verbose:
@@ -130,7 +131,7 @@ def select_context(all_text):
     else:
         context = m.group(0)
     if len(context)==len(all_text):
-        context = context + " "  # we want the next word after the end of the text, not the completion of the last
+        context = context
 
     return context
 ###

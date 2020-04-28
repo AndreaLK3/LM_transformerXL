@@ -6,9 +6,8 @@ import torch.nn.functional as F
 from Utilities import DEVICE
 
 CTX_LEN = 256 # number of tokens in a full transformer window
-LOGFILE = 'Transformer_LM.log'
-LOGLEVEL = logging.WARN
-
+NUM_OOW_PRESELECTED = 20
+NUM_PREFIX_PRESELECTED = 20000
 
 ###### top-k filtering: top_k > 0: keep only top k tokens with highest probability
 def top_k_top_p_filtering(logits, top_k=0, filter_value=-float('Inf')):
@@ -99,7 +98,7 @@ def get_logits(p_a_logsoftmax, hidden, target, keep_order=False):
 
 ##### Modified from: transformer-xl/pytorch/mem_transformer >> MemTransformerLM.forward(self, data, target, *mems)
 ##### runs the model,
-def get_probabilities(txl_model, data, target, *mems):
+def get_probabilities(txl_model, data, target, outofword_setting, *mems):
     # nn.DataParallel does not allow size(0) tensors to be broadcasted.
     # So, have to initialize size(0) mems inside the model forward.
     # Moreover, have to return new_mems to allow nn.DataParallel to piece
@@ -107,7 +106,7 @@ def get_probabilities(txl_model, data, target, *mems):
     if not mems: mems = txl_model.init_mems()
 
     tgt_len = target.size(0)
-    txl_model.eval()# evaluation mode
+    txl_model.eval()  # evaluation mode
     with torch.no_grad():
         hidden, new_mems = txl_model._forward(data, mems=mems)
 
@@ -119,7 +118,7 @@ def get_probabilities(txl_model, data, target, *mems):
 
     logits = logits.squeeze()
 
-    num_preselected = 20
+    num_preselected = NUM_OOW_PRESELECTED if outofword_setting else NUM_PREFIX_PRESELECTED
     filtered_logits = top_k_top_p_filtering(logits, top_k=num_preselected)
 
     sorted_logits, sorted_indices = torch.sort(filtered_logits, descending=True)
@@ -131,21 +130,27 @@ def get_probabilities(txl_model, data, target, *mems):
 
 
 ########## Entry point function
-def predict(model, vocabulary, context_tokens, labels_shape=(1,1)):
+def predict(model, vocabulary, context_tokens, outofword_setting, prefix, labels_shape=(1,1)):
     ctx_tensor = vocabulary.convert_to_tensor(context_tokens).unsqueeze(0).t().to(torch.int64).to(DEVICE)
 
     labels= torch.ones(size=labels_shape).to(torch.int64).to(DEVICE) # placeholder label, to specify that we are predicting the next token (or possibly more)
-    top_probs, top_indices = get_probabilities(model, data=ctx_tensor, target=labels)
+    top_probs, top_indices = get_probabilities(model, data=ctx_tensor, target=labels, outofword_setting=outofword_setting)
 
     # we have a choice. To visualize it, go from vocabulary indices to words:
     top_words = list(
         map(lambda i_tensor: vocabulary.convert_to_sent([i_tensor.item()]),  # , skip_special_tokens=True
             top_indices))
 
-    tokens_to_exclude = [sign for sign in string.punctuation] + ['”'] + [Utils.UNK_TOKEN, Utils.EOS_TOKEN]
-    indices_to_include = [i for i in range(len(top_words)) if top_words[i] not in tokens_to_exclude]
+    # prefix filter
+    if not(outofword_setting):
+        top_indices = torch.tensor([i for i in range(len(top_words)) if top_words[i].startswith(prefix)]).to(torch.int64).to(DEVICE)
+        top_probs = top_probs.index_select(index=top_indices, dim=0)
+        top_words = [top_words[top_indices[i].item()] for i in range(top_indices.shape[0])]
 
-    probs = top_probs.index_select(0, torch.tensor(indices_to_include).to(torch.int64).to(DEVICE))
-    words = [top_words[i] for i in indices_to_include]
+    tokens_to_exclude = [sign for sign in string.punctuation] + ['”'] + [Utils.UNK_TOKEN, Utils.EOS_TOKEN]
+    mask_to_include = torch.tensor([True if top_words[i] not in tokens_to_exclude else False
+                                    for i in range(len(top_words))])
+    words = [top_words[i] for i in range(len(top_words)) if mask_to_include[i]]
+    probs = torch.masked_select(top_probs, mask_to_include)
 
     return words[0:Utils.NUM_DISPLAYED], probs[0:Utils.NUM_DISPLAYED]
