@@ -26,7 +26,7 @@ As in Write-Assistant, a caret immediately after the end of a word means that we
 and thus, operating with a prefix - whereas a caret after a space, or adjacent to a punctuation sign, will ask for the next word.\
 `Hvad er klokken?|`: Next Word\
 `Jeg taler eng|`: Prefix: completing 'eng'\
-`Imorgen bliver jeg  |`: Next Word)\
+`I morgen bliver jeg  |`: Next Word)\
 
 ### Notes on necessary files & folders
 To deal with the different datasets - or any other that you may want to add - the current directory structure is as follows:

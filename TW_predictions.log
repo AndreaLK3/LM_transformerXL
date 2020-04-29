@@ -1,8 +1,8 @@
-04/28/2020 03:24:36 PM -INFO : Last character in the context:  
-04/28/2020 03:24:36 PM -INFO : Out-of-word setting: True
-04/28/2020 03:24:36 PM -INFO : *********
-['Imorgen', 'bliver', 'jeg']
+04/29/2020 10:11:14 AM -INFO : Last character in the context: ?
+04/29/2020 10:11:14 AM -INFO : Out-of-word setting: True
+04/29/2020 10:11:14 AM -INFO : *********
+['Hvad', 'er', 'klokken', '?']
 *********
-04/28/2020 03:24:36 PM -INFO : ['jeg', 'Du', 'som', 'der', 'for', 'du', 'I', 'Do', 'Are', 'det']
-04/28/2020 03:24:36 PM -INFO : tensor([0.0576, 0.0352, 0.0301, 0.0279, 0.0244, 0.0242, 0.0221, 0.0213, 0.0205,
-        0.0198], grad_fn=<SliceBackward>)
+04/29/2020 10:11:14 AM -INFO : ['Det', 'Hvad', 'Svaret', 'Hvorfor', 'I', 'Vi', 'Den', 'Man', 'Der', 'Hvordan']
+04/29/2020 10:11:14 AM -INFO : tensor([0.0539, 0.0454, 0.0324, 0.0291, 0.0218, 0.0189, 0.0168, 0.0129, 0.0113,
+        0.0103], grad_fn=<SliceBackward>)
