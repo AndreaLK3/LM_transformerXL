@@ -76,7 +76,11 @@ class LM_TransformerXL():
 
 def load_model_and_vocab(dataset_dirpath):
 
-    sys.path.append(os.path.join('transformer-xl', 'pytorch'))
+    # relative path: sys.path.append(os.path.join('transformer-xl', 'pytorch'))
+    # absolute path - working directory:
+    sys.path.append(os.path.join( os.path.abspath(os.getcwd()), 'transformer-xl', 'pytorch'))
+    # absolute path - file
+    sys.path.append((os.path.abspath(__file__), 'transformer-xl', 'pytorch'))
     data_utils = importlib.import_module('data_utils')
 
     corpus_fpath = os.path.join(dataset_dirpath, 'corpus.pt')
@@ -88,7 +92,10 @@ def load_model_and_vocab(dataset_dirpath):
         torch.save(text_corpus, corpus_fpath)
 
     vocabulary = text_corpus.vocab
-    vocabulary.unk_idx = vocabulary.sym2idx['<UNK>']
+    try:
+        vocabulary.unk_idx = vocabulary.sym2idx['<UNK>']
+    except KeyError:
+        vocabulary.unk_idx = vocabulary.sym2idx['<unk>']
 
     txl_model = get_txl_model(dataset_dirpath)
 

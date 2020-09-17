@@ -1,8 +1,8 @@
-04/29/2020 10:11:14 AM -INFO : Last character in the context: ?
-04/29/2020 10:11:14 AM -INFO : Out-of-word setting: True
-04/29/2020 10:11:14 AM -INFO : *********
-['Hvad', 'er', 'klokken', '?']
+09/17/2020 11:01:34 AM -INFO : Last character in the context:  
+09/17/2020 11:01:34 AM -INFO : Out-of-word setting: True
+09/17/2020 11:01:34 AM -INFO : *********
+['New', 'York', 'er', 'en']
 *********
-04/29/2020 10:11:14 AM -INFO : ['Det', 'Hvad', 'Svaret', 'Hvorfor', 'I', 'Vi', 'Den', 'Man', 'Der', 'Hvordan']
-04/29/2020 10:11:14 AM -INFO : tensor([0.0539, 0.0454, 0.0324, 0.0291, 0.0218, 0.0189, 0.0168, 0.0129, 0.0113,
-        0.0103], grad_fn=<SliceBackward>)
+09/17/2020 11:01:35 AM -INFO : ['af', 'stor', 'del', 'vigtig', 'meget', 'amerikansk', 'prominent', 'velkendt', 'forstad', 'by']
+09/17/2020 11:01:35 AM -INFO : tensor([0.4562, 0.1266, 0.0640, 0.0370, 0.0305, 0.0213, 0.0194, 0.0167, 0.0152,
+        0.0147], grad_fn=<SliceBackward>)

@@ -4,6 +4,7 @@
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/LM_transformerXL/transformer-xl" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/LM_transformerXL/wikiextractor" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/suggestions_endpoint" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/transformer-xl" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/wikiextractor" vcs="Git" />
   </component>

@@ -13,7 +13,6 @@ class Dataset(Enum):
     WIKITEXT_103 = (os.path.join(os.getcwd(), Utils.DATASETS_FOLDER, Utils.WIKITEXT_103),
                     None)
 
-
 ##### Filesystem check
 def check_dataset_splits_present(dataset_dirpath):
     return ( os.path.exists(os.path.join(dataset_dirpath, 'train.txt'))
